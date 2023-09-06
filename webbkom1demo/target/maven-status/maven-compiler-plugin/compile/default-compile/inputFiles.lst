@@ -1,0 +1,17 @@
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/model/ForeCast.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/repositories/ForecastRepository.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/Webbkom1demoApplication.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/services/ForeCastService.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/dto/NewForecastDTO.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/services/smhi/data/Parameter.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/services/smhi/data/TimeSeries.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/dto/ForecastListDTO.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/controllers/SmhiController.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/controllers/ForeCastController.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/menu/Menu.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/services/smhi/data/Geometry.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/services/smhi/data/Root.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/colors/Cc.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/URLS/Urls.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/services/smhi/SmhiService.java
+/home/lains/stiWebbkom/webbkom1demo/src/main/java/com/example/webbkom1demo/model/DataSource.java

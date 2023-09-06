@@ -1,0 +1,16 @@
+[ {
+  "firstName" : "simon",
+  "lastName" : "kern",
+  "city" : "sthlm",
+  "country" : "swe"
+}, {
+  "firstName" : "mymanbrofist",
+  "lastName" : "mishadshi",
+  "city" : "sthlm",
+  "country" : "swe"
+}, {
+  "firstName" : "Fredrik",
+  "lastName" : "bro1",
+  "city" : "Stockholm",
+  "country" : "Sweden"
+} ]
