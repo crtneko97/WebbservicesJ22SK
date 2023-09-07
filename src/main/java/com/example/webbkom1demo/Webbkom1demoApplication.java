@@ -188,21 +188,5 @@ private SmhiService smhiService;
 		}catch(IOException e) {e.printStackTrace();}
 	}
 	
-//	private void updatePrediction(Scanner scan) throws IOException {
-//	listPredictions();
-//	System.out.printf("Ange vilken du vill uppdatera:");
-//	int num = scan.nextInt() ;
-//	var forecast = forecastService.getByIndex(num-1);
-//	System.out.printf("%d %d CURRENT: %f %n",
-//			forecast.getDate(),
-//			forecast.getHour(),
-//			forecast.getTemperature()
-//	);
-//	System.out.printf("Ange ny temp:");
-//	float temp = scan.nextFloat() ;
-//	forecast.setTemperature(temp);
-//	forecastService.update(forecast);
-//}
-	
 }	
 

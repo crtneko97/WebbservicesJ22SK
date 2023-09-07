@@ -52,7 +52,6 @@ public class SmhiService {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
-
         StringWriter stringWriter = new StringWriter();
         objectMapper.writeValue(stringWriter, smhiPredictions);
 

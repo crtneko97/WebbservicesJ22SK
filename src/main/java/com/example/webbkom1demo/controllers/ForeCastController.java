@@ -23,24 +23,6 @@ import com.example.webbkom1demo.model.DataSource;
 import com.example.webbkom1demo.model.ForeCast;
 import com.example.webbkom1demo.services.ForeCastService;
 
-
-/*
- * Man skapar ett nytt DTO baserat på vem som använder tjänsten.
- * 
- * Kan man inte via repositoryt begränsa vad som ska visas och använda det i controllern?
- */
-
-	// 1, Clienbt anropar /api/forecasts GET
-	// 2, spring kolalr vilken funktion hanterar denna /api/forecasts
-	// 3, spring anropar den funktionen
-	// 3.5 Koden körs
-	// 4. Spring tar det som funktionen returnar och gör till JSON
-	// 5. Spring skickar tillbaka JSON till client
-
-
-	// varför gör man det som en stream och inte bara en for loop
-
-
 @RestController
 public class ForeCastController {
 
@@ -59,54 +41,37 @@ public class ForeCastController {
 		}).collect(Collectors.toList()), HttpStatus.OK);
 	}
 	
-	/* Den äldre get metoden
+	
 	@GetMapping("/api/forecasts/{id}")
-	  public ResponseEntity<ForeCast> Get(@PathVariable UUID id){
-        Optional<ForeCast> forecast = forecastService.get(id);
-        if(forecast.isPresent()) return ResponseEntity.ok(forecast.get());
-        return  ResponseEntity.notFound().build();
-    }
-    */
-	
-//	@GetMapping("/api/forecasts/{id}")
-//	public ResponseEntity<ForeCast> get(@PathVariable UUID id){
-//		Optional<ForeCast> forecast = forecastService.get(id);
-//		if(forecast.isPresent()) return ResponseEntity.ok(forecast.get());
-//		return ResponseEntity.notFound().build();
-//	}
-	
-//	@PutMapping("/api/forecasts/{id}")
-//	public ResponseEntity<ForeCast> update(@PathVariable UUID id, @RequestBody NewForecastDTO newForecastDTO) throws IOException{
-//		var forecast = new ForeCast();
-//		forecast.setId(id);
-//		forecast.setPredictionDatum(newForecastDTO.getDate());
-//		forecast.setPredictionHour(newForecastDTO.getHour());
-//		forecast.setPredictionTemperature(newForecastDTO.getTemperature());
-//		forecastService.update(forecast);
-//		return ResponseEntity.ok(forecast);
-//	}
+	public ResponseEntity<ForeCast> get(@PathVariable UUID id){
+		Optional<ForeCast> forecast = forecastService.get(id);
+		if(forecast.isPresent()) return ResponseEntity.ok(forecast.get());
+		return ResponseEntity.notFound().build();
+	}
 	
 	@PostMapping("/api/forecasts")
-	public ResponseEntity<ForeCast> newForecast (@RequestBody ForeCast forecast) throws IOException {
-		var newCreated = forecastService.add(forecast);
-		return ResponseEntity.ok(newCreated);
+	public ResponseEntity newForecast (@RequestBody NewForecastDTO forecastDTO) throws IOException {
+	var forecast = new ForeCast();
+	forecast.setId(UUID.randomUUID());
+	forecast.setPredictionDatum(forecastDTO.getDate());
+	forecast.setPredictionTemperature(forecastDTO.getTemperature());
+	forecast.setPredictionHour(forecastDTO.getHour());
+	var newCreated = forecastService.add(forecast);
+	return ResponseEntity.ok(newCreated);
 	}
 	
 	
 	@PutMapping("/api/forecasts/{id}")
-    public ResponseEntity<ForeCast> Update(@PathVariable UUID id, @RequestBody NewForecastDTO newforecastdto) throws IOException {
-        var forecast = forecastService.get(id).get();
-        
-        forecast.setId(id);
-        forecast.setPredictionDatum(newforecastdto.getDate());
-        forecast.setPredictionTemperature(newforecastdto.getTemperature());
-        forecast.setPredictionHour(newforecastdto.getHour());
+	public ResponseEntity Update(@PathVariable UUID id, @RequestBody NewForecastDTO newforecastdto) throws IOException {
+	var forecast = forecastService.get(id).get();
 
-        
-        
-		forecastService.update(forecast);
-        return ResponseEntity.ok(forecast);
-    }
-    
+	forecast.setId(id);
+	forecast.setPredictionDatum(newforecastdto.getDate());
+	forecast.setPredictionTemperature(newforecastdto.getTemperature());
+	forecast.setPredictionHour(newforecastdto.getHour());
+
+	forecastService.update(forecast);
+	return ResponseEntity.ok(forecast);
+	}
     
 }

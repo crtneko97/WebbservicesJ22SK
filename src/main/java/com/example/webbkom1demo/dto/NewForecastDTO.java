@@ -3,7 +3,6 @@ package com.example.webbkom1demo.dto;
 import java.time.LocalDate;
 
 public class NewForecastDTO {
-	//Lägg till alla världen älskar dig yahya och askhan
 	private LocalDate date;
 	private int hour;
 	private float temperature;
