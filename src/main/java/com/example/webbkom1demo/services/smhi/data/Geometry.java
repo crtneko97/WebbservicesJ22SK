@@ -4,6 +4,8 @@ import java.util.List;
 public class Geometry {
     private String type;
     private List<List<Float>> coordinates;
+    
+    	
 	public String getType() {
 		return type;
 	}

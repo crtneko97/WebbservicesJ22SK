@@ -95,26 +95,13 @@ public class ForeCastController {
 	
 	@PutMapping("/api/forecasts/{id}")
     public ResponseEntity<ForeCast> Update(@PathVariable UUID id, @RequestBody NewForecastDTO newforecastdto) throws IOException {
-        var forecast = new ForeCast();
+        var forecast = forecastService.get(id).get();
         
         forecast.setId(id);
         forecast.setPredictionDatum(newforecastdto.getDate());
         forecast.setPredictionTemperature(newforecastdto.getTemperature());
         forecast.setPredictionHour(newforecastdto.getHour());
-//        forecast.setLongitude(newforecastdto.getLongitude());
-//        forecast.setLatitude(newforecastdto.getLatitude());
-//        forecast.setCreated(newforecastdto.getCreated());
-//        forecast.setRainOrSnow(newforecastdto.isRainOrSnow());
-//        forecast.setApiProvider(newforecastdto.getDataSource());
-        
-        //lägg till allt annat sen när du pallar :) :P 
-//        
-//        forecastFromSmhi.setRainOrSnow(rainOrSnow);
-//        forecastFromSmhi.setPredictionTemperature(paramValue);
-//        forecastFromSmhi.setLatitude(latitude);
-//        forecastFromSmhi.setLongitude(longitude);
-//        forecastFromSmhi.setCreated(LocalDateTime.now());
-//        forecastFromSmhi.setApiProvider(DataSource.Smhi);
+
         
         
 		forecastService.update(forecast);
