@@ -2,6 +2,8 @@ package com.example.webbkom1demo.controllers;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,10 +30,11 @@ public class ForeCastController {
 
 	@Autowired
 	private ForeCastService forecastService;
-	
+	//Vi har nånting och vi mappar om det till något annat objekt
+	// responseEntity bakar ihop status kod och json samtidigt.
 	@GetMapping("/api/forecasts/")			
 	public ResponseEntity<List<ForecastListDTO>> getAll(){		
-		return new ResponseEntity<List<ForecastListDTO>>(forecastService.getForecast().stream().map(forecast->{
+		return new ResponseEntity<List<ForecastListDTO>>(forecastService.getForecastfromDB().stream().map(forecast->{
 			var forecastListDTO = new ForecastListDTO();
 			forecastListDTO.Id = forecast.getId();
 			forecastListDTO.Date = forecast.getPredictionDatum();
@@ -39,6 +42,21 @@ public class ForeCastController {
 			forecastListDTO.Hour = forecast.getPredictionHour();
 			return forecastListDTO;
 		}).collect(Collectors.toList()), HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/api/forecasts/onedayahead")			
+	public ResponseEntity<List<ForecastListDTO>> getAllInOneDay() {
+	    List<ForeCast> forecasts = forecastService.getForecastFromDBonedayahead();
+	    List<ForecastListDTO> forecastListDTOs = forecasts.stream().map(forecast -> {
+	        var forecastListDTO = new ForecastListDTO();
+	        forecastListDTO.Id = forecast.getId();
+	        forecastListDTO.Date = forecast.getPredictionDatum();
+	        forecastListDTO.Temperature = forecast.getPredictionTemperature();
+	        forecastListDTO.Hour = forecast.getPredictionHour();
+	        return forecastListDTO;
+	    }).collect(Collectors.toList());
+	    return new ResponseEntity<>(forecastListDTOs, HttpStatus.OK);
 	}
 	
 	
@@ -63,8 +81,9 @@ public class ForeCastController {
 	
 	@PutMapping("/api/forecasts/{id}")
 	public ResponseEntity Update(@PathVariable UUID id, @RequestBody NewForecastDTO newforecastdto) throws IOException {
+	//vi måste hämta den befintiliga därför skriver vi inte new
 	var forecast = forecastService.get(id).get();
-
+	
 	forecast.setId(id);
 	forecast.setPredictionDatum(newforecastdto.getDate());
 	forecast.setPredictionTemperature(newforecastdto.getTemperature());

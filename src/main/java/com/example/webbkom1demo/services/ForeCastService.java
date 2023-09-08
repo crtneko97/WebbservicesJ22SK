@@ -38,7 +38,37 @@ public class ForeCastService {
 	
 	private static List<ForeCast> forecasts = new ArrayList<>();
 	
-	public List<ForeCast> getForecast() {
+	
+//	public List<ForeCast> getForecastFromDBonedayahead() {
+//	    List<ForeCast> forecasts = forecastRepository.findAlloneDayahead();
+//	    
+//	    for (ForeCast forecast : forecasts) {
+//	        System.out.println("Forecast ID: " + forecast.getId());
+//	        System.out.println("Longitude: " + forecast.getLongitude());
+//	        System.out.println("Latitude: " + forecast.getLatitude());
+//	        System.out.println("Temperature: " + forecast.getPredictionTemperature());
+//	        System.out.println("Prediction Datum: " + forecast.getPredictionDatum());
+//	        System.out.println("-----------");
+//	    }
+//	    
+//	    return forecasts;
+//	}
+	public List<ForeCast> getForecastFromDBonedayahead() {
+	    List<ForeCast> forecasts = forecastRepository.findAllForecastsForTomorrow();
+	    
+	    for (ForeCast forecast : forecasts) {
+	        System.out.println("Forecast ID: " + forecast.getId());
+	        System.out.println("Longitude: " + forecast.getLongitude());
+	        System.out.println("Latitude: " + forecast.getLatitude());
+	        System.out.println("Temperature: " + forecast.getPredictionTemperature());
+	        System.out.println("Prediction Datum: " + forecast.getPredictionDatum());
+	        System.out.println("-----------");
+	    }
+	    
+	    return forecasts;
+	}
+	
+	public List<ForeCast> getForecastfromDB() {
 	    List<ForeCast> forecasts = forecastRepository.findAll();
 	    
 	    for (ForeCast forecast : forecasts) {

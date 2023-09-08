@@ -61,12 +61,13 @@ private SmhiService smhiService;
 			System.out.println(Menu.menu());
 			int sel = scan.nextInt();
 			if(sel == 1){forecastService.fetchAndSaveToDB();}
-			else if(sel == 2){forecastService.getForecast();}
+			else if(sel == 2){forecastService.getForecastfromDB();}
 			else if(sel == 3) {listSMHI();}
 			else if(sel == 4) {listSMHIoneDayAhead();}
 			else if(sel == 5) {addPrediction(scan);}
 			else if(sel == 6) {forecastService.getForecastsWithCloseTemperatures(20.0f, 2.0f);}
 			else if(sel == 7) {System.out.println("Average Temperature: " + forecastService.calculateAverageTemperature());}
+			else if(sel == 8) {forecastService.getForecastFromDBonedayahead();}
 			else if(sel == 100){break;}
 		}
 	}
