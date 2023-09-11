@@ -24,9 +24,16 @@ public class Menu {
 				+ "5: add your own preidiction to the api/database by input\n"
 				+ "8: list weather prediction one day ahead from database\n"
 				+ "9: list the average predicted temperature for tomorrow\n"
+				+ "10: list the following getmappings\n"
 				+ "100: break the loop";
 	}
-
+	
+	public static String urlsWeb() {
+		return "- /api/forecasts/ \n"
+				+ "- /average-temperature-tomorrow \n"
+				+ "- /api/forecasts/onedayahead \n"
+				+ "- /api/forecasts/{id} \n";
+	}
 }
 /*
 var forecast = new ForeCast();

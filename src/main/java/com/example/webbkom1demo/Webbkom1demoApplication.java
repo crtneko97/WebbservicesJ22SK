@@ -68,6 +68,7 @@ private SmhiService smhiService;
 			else if(sel == 5) {addPrediction(scan);}
 			else if(sel == 8) {forecastService.getForecastFromDBonedayahead();}
 			else if(sel == 9) {listAverageTempOneDayAhead();}
+			else if(sel == 10) {System.out.println(Menu.urlsWeb());}
 			else if(sel == 100){break;}
 		}
 	}
