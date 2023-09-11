@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -65,13 +66,22 @@ private SmhiService smhiService;
 			else if(sel == 3) {listSMHI();}
 			else if(sel == 4) {listSMHIoneDayAhead();}
 			else if(sel == 5) {addPrediction(scan);}
-			else if(sel == 6) {forecastService.getForecastsWithCloseTemperatures(20.0f, 2.0f);}
-			else if(sel == 7) {System.out.println("Average Temperature: " + forecastService.calculateAverageTemperature());}
 			else if(sel == 8) {forecastService.getForecastFromDBonedayahead();}
+			else if(sel == 9) {listAverageTempOneDayAhead();}
 			else if(sel == 100){break;}
 		}
 	}
 	
+	private void listAverageTempOneDayAhead() throws IOException{
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime tmrw = now.plusDays(1);
+		String formatedDate = tmrw.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		
+		System.out.println("\n\nDate: " + formatedDate
+				+ "\nAverage temp: " + forecastService.calculateAverageTemperature());
+		
+	}
 
 
 	private void listSMHIoneDayAhead() throws IOException{

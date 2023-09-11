@@ -32,6 +32,7 @@ public class ForeCastController {
 	private ForeCastService forecastService;
 	//Vi har nånting och vi mappar om det till något annat objekt
 	// responseEntity bakar ihop status kod och json samtidigt.
+	
 	@GetMapping("/api/forecasts/")			
 	public ResponseEntity<List<ForecastListDTO>> getAll(){		
 		return new ResponseEntity<List<ForecastListDTO>>(forecastService.getForecastfromDB().stream().map(forecast->{
@@ -44,6 +45,16 @@ public class ForeCastController {
 		}).collect(Collectors.toList()), HttpStatus.OK);
 	}
 	
+	@GetMapping("/average-temperature-tomorrow")
+    public ResponseEntity<Float> calculateAverageTemperatureForTomorrow() {
+        Float averageTemperature = forecastService.calculateAverageTemperatureForTomorrowUsingQuery();
+
+        if (averageTemperature != null) {
+            return new ResponseEntity<>(averageTemperature, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 	
 	@GetMapping("/api/forecasts/onedayahead")			
 	public ResponseEntity<List<ForecastListDTO>> getAllInOneDay() {

@@ -21,4 +21,11 @@ public interface ForecastRepository extends CrudRepository<ForeCast, UUID>{
 	
 	@Query(value = "SELECT * FROM fore_cast f1_0 WHERE DATE(f1_0.prediction_datum) = DATE(DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY))", nativeQuery = true)
 	List<ForeCast> findAllForecastsForTomorrow();
+	
+    @Query(value = "SELECT AVG(f.prediction_temperature) FROM fore_cast f WHERE DATE(f.prediction_datum) = DATE(DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY))", nativeQuery = true)
+    Float calculateAverageTemperatureForTomorrow();
+
+	
+	
+	
 }

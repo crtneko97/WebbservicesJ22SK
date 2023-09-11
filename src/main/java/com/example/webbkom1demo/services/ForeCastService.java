@@ -38,21 +38,8 @@ public class ForeCastService {
 	
 	private static List<ForeCast> forecasts = new ArrayList<>();
 	
+	//Skapa en metod för average från databasen
 	
-//	public List<ForeCast> getForecastFromDBonedayahead() {
-//	    List<ForeCast> forecasts = forecastRepository.findAlloneDayahead();
-//	    
-//	    for (ForeCast forecast : forecasts) {
-//	        System.out.println("Forecast ID: " + forecast.getId());
-//	        System.out.println("Longitude: " + forecast.getLongitude());
-//	        System.out.println("Latitude: " + forecast.getLatitude());
-//	        System.out.println("Temperature: " + forecast.getPredictionTemperature());
-//	        System.out.println("Prediction Datum: " + forecast.getPredictionDatum());
-//	        System.out.println("-----------");
-//	    }
-//	    
-//	    return forecasts;
-//	}
 	public List<ForeCast> getForecastFromDBonedayahead() {
 	    List<ForeCast> forecasts = forecastRepository.findAllForecastsForTomorrow();
 	    
@@ -105,6 +92,10 @@ public class ForeCastService {
 
         return closeTemperatureForecasts;
     }
+	
+	  public Float calculateAverageTemperatureForTomorrowUsingQuery() {
+	        return forecastRepository.calculateAverageTemperatureForTomorrow();
+	    }
 	
 	public float calculateAverageTemperature() {
 	    List<ForeCast> forecasts = forecastRepository.findAll();
@@ -196,9 +187,6 @@ public class ForeCastService {
 				}
 			}
 	}
-		
-
-
 
 	public ForeCast add(ForeCast forecast) {
 		forecastRepository.save(forecast);
@@ -220,73 +208,4 @@ public class ForeCastService {
 			//return forecastRepository;
 		
 	}
-	
-	
-  
-    //Gammal kod    
-//    private List<ForeCast> readFromFile() throws IOException {
-//        if(!Files.exists(Path.of("predictions.json"))) return new ArrayList<ForeCast>();
-//        ObjectMapper objectMapper = getObjectMapper();
-//        var jsonStr = Files.readString(Path.of("predictions.json"));
-//        return  new ArrayList(Arrays.asList(objectMapper.readValue(jsonStr, ForeCast[].class ) ));
-//    }
-//
-//
-//    private void writeAllToFile(List<ForeCast> weatherPredictions) throws IOException {
-//        ObjectMapper objectMapper = getObjectMapper();
-//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-//        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-//
-//
-//        StringWriter stringWriter = new StringWriter();
-//        objectMapper.writeValue(stringWriter, weatherPredictions);
-//
-//        Files.writeString(Path.of("predictions.json"), stringWriter.toString());
-//    }
-//
-//
-//    private static ObjectMapper getObjectMapper() {
-//        ObjectMapper mapper = new ObjectMapper();
-//        //mapper.registerModule(new JavaTimeModule());
-//        return mapper;
-//    }
-//
-//    public List<ForeCast> getForecasts(){
-//        return forecasts;
-//    }
-//    
-//    public ForeCast add(ForeCast forecast) throws IOException {
-//    	forecast.setId(UUID.randomUUID());
-//    	forecasts.add(forecast);
-//    	writeAllToFile(forecasts);
-//    	return forecast;
-//    }
-//    /*
-//    public void add(ForeCast forecast) throws IOException {
-//        forecasts.add(forecast);
-//        writeAllToFile(forecasts);
-//    }
-//    */
-//
-//    public ForeCast getByIndex(int i) {
-//        return forecasts.get(i);
-//    }
-//
-//    public void update(ForeCast forecast) throws IOException {
-//        writeAllToFile(forecasts);
-//    }
-//	
-//    public void update2(ForeCast forecastFromUser) throws IOException {
-//        
-//        var foreCastInList = get(forecastFromUser.getId()).get();
-//        foreCastInList.setTemperature(forecastFromUser.getTemperature());
-//        foreCastInList.setDate(forecastFromUser.getDate());
-//        foreCastInList.setHour(forecastFromUser.getHour());
-//        writeAllToFile(forecasts);
-//    }   
-//    
-//	public Optional<ForeCast> get(UUID id){
-//		return getForecasts().stream().filter(forecast -> forecast.getId().equals(id))
-//                .findFirst();
-//	}
 }
