@@ -14,12 +14,17 @@ public class Menu {
 	}
 	
 	public static String menu() {
-		return  
-				"1. Add prediction to database\t"
-				+"2. Select from database\n"
-				+"3. List SMHI Api\t"
-				+"4. List SMHI one day ahead."
-				+ "\n\n100. Exit";
+		return  "\n***School project***\nCourse: Webservices in java\nTeacher: Stefan HolmBerg"
+				+"\nSchool: Stockholms Teknsika Institut\nStudent: Simon Kern \nGithub: https://github.com/crtneko97"
+				+"\n***Commands***\n"
+				+ "1: fetch weatherprediction api and save it to MYSQL database\n"
+				+ "2: list weather prediction from MYSQL database\n"
+				+ "3: list weather predicition directly from SMHI api\n"
+				+ "4: list weather prediction one day ahead from SMHI api\n"
+				+ "5: add your own preidiction to the api/database by input\n"
+				+ "8: list weather prediction one day ahead from database\n"
+				+ "9: list the average predicted temperature for tomorrow\n"
+				+ "100: break the loop";
 	}
 
 }
