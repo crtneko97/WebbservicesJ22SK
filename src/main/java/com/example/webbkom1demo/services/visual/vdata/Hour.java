@@ -12,6 +12,9 @@ public class Hour {
     private float precipprob;
     private float snow;
     private List<String> preciptype;
+    
+    
+    //Getters and setters only none specified ones, just classic source implement from IDE
 	public String getDatetime() {
 		return datetime;
 	}

@@ -9,6 +9,9 @@ public class CurrentConditions {
     private float precipprob;
     private float snow;
     private Object preciptype;
+    
+    
+    //Getters and setters IDE implemented
 	public String getDatetime() {
 		return datetime;
 	}

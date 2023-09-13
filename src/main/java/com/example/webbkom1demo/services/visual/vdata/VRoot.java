@@ -14,6 +14,10 @@ public class VRoot {
     private List<Day> days;
     private List<Object> alerts;
     private CurrentConditions currentConditions;
+    
+    
+    
+    //Getters and setters IDE implemented
 	public int getQueryCost() {
 		return queryCost;
 	}

@@ -18,12 +18,12 @@ import com.example.webbkom1demo.colors.Cc;
 import com.example.webbkom1demo.menu.Menu;
 import com.example.webbkom1demo.model.ForeCast;
 import com.example.webbkom1demo.services.ForeCastService;
+import com.example.webbkom1demo.services.VisualService;
 import com.example.webbkom1demo.services.smhi.SmhiService;
 import com.example.webbkom1demo.services.smhi.data.Geometry;
 import com.example.webbkom1demo.services.smhi.data.Parameter;
 import com.example.webbkom1demo.services.smhi.data.Root;
 import com.example.webbkom1demo.services.smhi.data.TimeSeries;
-import com.example.webbkom1demo.services.visual.vdata.CurrentConditions;
 import com.example.webbkom1demo.services.visual.vdata.Day;
 import com.example.webbkom1demo.services.visual.vdata.Hour;
 import com.example.webbkom1demo.services.visual.vdata.VRoot;
@@ -38,6 +38,9 @@ private ForeCastService forecastService;
 
 @Autowired 
 private SmhiService smhiService;
+
+@Autowired
+private VisualService visualService;
 		
 	
 	public static void main(String[] args) {
@@ -154,16 +157,18 @@ private SmhiService smhiService;
 		forecastService.add(forecast);
 	}
 	
-	//Testar att skriva ut Visual API
+	//Testing to write out the types from the visual API
+	//Don't have to read it over to JSON FILE, more important to fetch it into the MYSQL database
+	//Go over what types that has to be sent into the MYSQL database, check out VRoot~Visual file
 	private void listVisual() throws IOException{
 		var objectMapper = new ObjectMapper();
 		
 		VRoot vroot = objectMapper.readValue(new URL(Urls.visualAPI()),
 				VRoot.class);
-		
+
 		for(Day days : vroot.getDays()) {
 			
-			System.out.println("***DAY***");
+			System.out.println(Cc.C+"***DAY***");
 			System.out.println("\n\nDateTime: " + days.getDatetime()
 							+ "\nDateTimeEpoch: "+days.getDatetimeEpoch() 
 							+ "\nTemp: "+days.getTemp() 
@@ -171,12 +176,12 @@ private SmhiService smhiService;
 							+ "\nPrecip: "+days.getPrecip()
 							+ "\nPrecipprob: "+days.getPrecipprob()
 							+ "\nPreciptype: "+days.getPreciptype()
-							+ "\nSnow: "+days.getSnow()+"\n");
+							+ "\nSnow: "+days.getSnow()+Cc.RES+"\n");
 			List<Hour> hours = days.getHours();
 				if(hours != null) {
 					for(Hour hour : hours) {
 						
-						System.out.println("***HOUR***");
+						System.out.println(Cc.GR+"***HOUR***");
 						System.out.println("Datetime: "+hour.getDatetime()
 								+"\nDatetimeepoch: "+hour.getDatetimeEpoch()
 								+"\nTemp: "+hour.getTemp()
@@ -185,10 +190,12 @@ private SmhiService smhiService;
 								+"\nPrecipprob: "+hour.getPrecipprob()
 								+"\nSnow: "+hour.getSnow()
 								+"\nPrecipType: "+hour.getPreciptype()
-								+"\n");
+								+"\n"+Cc.RES);
+						
 					}
 				}else {System.out.println("No Hours Avaiable ^^");}
-			}
+				System.out.println(Cc.YE+"How many days that were parsed: "+vroot.getDays().size()+Cc.RES);
+		}
 		
 		var currentconditions = vroot.getCurrentConditions();
 		System.out.println("\n***CURRENT CONDITIONS***");
@@ -204,6 +211,8 @@ private SmhiService smhiService;
 		
 	}
 	
+	
+	//List smhi and write over to JSON file **WORKING**
 	private void listSMHI() {
 		var objectMapper = new ObjectMapper();
 		try {

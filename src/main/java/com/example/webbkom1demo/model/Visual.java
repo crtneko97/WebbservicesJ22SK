@@ -3,11 +3,13 @@ package com.example.webbkom1demo.model;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 //Lägg till entity senare
+@Entity
 public class Visual {
 		
 		@Id
@@ -31,6 +33,8 @@ public class Visual {
 	    	this.created = LocalDateTime.now();
 	    }
 
+	    
+	    //Getters and setters source IDE implemented.
 		public UUID getId() {
 			return id;
 		}

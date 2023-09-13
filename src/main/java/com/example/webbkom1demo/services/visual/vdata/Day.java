@@ -15,6 +15,7 @@ public class Day {
     private List<Hour> hours;
     
     
+    //Getters and setters IDE implemented
 	public String getDatetime() {
 		return datetime;
 	}
