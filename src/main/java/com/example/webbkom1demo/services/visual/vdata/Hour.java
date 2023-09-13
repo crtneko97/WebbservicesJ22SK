@@ -1,0 +1,64 @@
+package com.example.webbkom1demo.services.visual.vdata;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Hour {
+    private String datetime;
+    private int datetimeEpoch;
+    private float temp;
+    private float humidity;
+    private float precip;
+    private float precipprob;
+    private float snow;
+    private List<String> preciptype;
+	public String getDatetime() {
+		return datetime;
+	}
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
+	}
+	public int getDatetimeEpoch() {
+		return datetimeEpoch;
+	}
+	public void setDatetimeEpoch(int datetimeEpoch) {
+		this.datetimeEpoch = datetimeEpoch;
+	}
+	public float getTemp() {
+		return temp;
+	}
+	public void setTemp(float temp) {
+		this.temp = temp;
+	}
+	public float getHumidity() {
+		return humidity;
+	}
+	public void setHumidity(float humidity) {
+		this.humidity = humidity;
+	}
+	public float getPrecip() {
+		return precip;
+	}
+	public void setPrecip(float precip) {
+		this.precip = precip;
+	}
+	public float getPrecipprob() {
+		return precipprob;
+	}
+	public void setPrecipprob(float precipprob) {
+		this.precipprob = precipprob;
+	}
+	public float getSnow() {
+		return snow;
+	}
+	public void setSnow(float snow) {
+		this.snow = snow;
+	}
+	public List<String> getPreciptype() {
+		return preciptype;
+	}
+	public void setPreciptype(List<String> preciptype) {
+		this.preciptype = preciptype;
+	}
+    
+}

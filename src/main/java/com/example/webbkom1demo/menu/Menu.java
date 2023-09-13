@@ -25,6 +25,7 @@ public class Menu {
 				+ "8: list weather prediction one day ahead from database\n"
 				+ "9: list the average predicted temperature for tomorrow\n"
 				+ "10: list the following getmappings\n"
+				+"99: List VISUAL API(WORKING)**STILL IN PROGRESS**\n"
 				+ "100: break the loop";
 	}
 	

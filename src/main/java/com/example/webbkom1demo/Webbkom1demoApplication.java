@@ -1,35 +1,33 @@
 package com.example.webbkom1demo;
 
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Scanner;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import com.example.webbkom1demo.URLS.Urls;
 import com.example.webbkom1demo.colors.Cc;
 import com.example.webbkom1demo.menu.Menu;
-import com.example.webbkom1demo.model.DataSource;
 import com.example.webbkom1demo.model.ForeCast;
-import com.example.webbkom1demo.repositories.ForecastRepository;
 import com.example.webbkom1demo.services.ForeCastService;
 import com.example.webbkom1demo.services.smhi.SmhiService;
 import com.example.webbkom1demo.services.smhi.data.Geometry;
 import com.example.webbkom1demo.services.smhi.data.Parameter;
 import com.example.webbkom1demo.services.smhi.data.Root;
 import com.example.webbkom1demo.services.smhi.data.TimeSeries;
+import com.example.webbkom1demo.services.visual.vdata.CurrentConditions;
+import com.example.webbkom1demo.services.visual.vdata.Day;
+import com.example.webbkom1demo.services.visual.vdata.Hour;
+import com.example.webbkom1demo.services.visual.vdata.VRoot;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
-import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class Webbkom1demoApplication implements CommandLineRunner{
@@ -69,6 +67,7 @@ private SmhiService smhiService;
 			else if(sel == 8) {forecastService.getForecastFromDBonedayahead();}
 			else if(sel == 9) {listAverageTempOneDayAhead();}
 			else if(sel == 10) {System.out.println(Menu.urlsWeb());}
+			else if (sel == 99) {listVisual();}
 			else if(sel == 100){break;}
 		}
 	}
@@ -153,6 +152,56 @@ private SmhiService smhiService;
 		forecast.setPredictionTemperature(ptemp);
 		forecast.setRainOrSnow(rainorsnow);
 		forecastService.add(forecast);
+	}
+	
+	//Testar att skriva ut Visual API
+	private void listVisual() throws IOException{
+		var objectMapper = new ObjectMapper();
+		
+		VRoot vroot = objectMapper.readValue(new URL(Urls.visualAPI()),
+				VRoot.class);
+		
+		for(Day days : vroot.getDays()) {
+			
+			System.out.println("***DAY***");
+			System.out.println("\n\nDateTime: " + days.getDatetime()
+							+ "\nDateTimeEpoch: "+days.getDatetimeEpoch() 
+							+ "\nTemp: "+days.getTemp() 
+							+ "\nHumidity: "+days.getHumidity()
+							+ "\nPrecip: "+days.getPrecip()
+							+ "\nPrecipprob: "+days.getPrecipprob()
+							+ "\nPreciptype: "+days.getPreciptype()
+							+ "\nSnow: "+days.getSnow()+"\n");
+			List<Hour> hours = days.getHours();
+				if(hours != null) {
+					for(Hour hour : hours) {
+						
+						System.out.println("***HOUR***");
+						System.out.println("Datetime: "+hour.getDatetime()
+								+"\nDatetimeepoch: "+hour.getDatetimeEpoch()
+								+"\nTemp: "+hour.getTemp()
+								+"\nHumidity: "+hour.getHumidity()
+								+"\nPrecip: "+hour.getPrecip()
+								+"\nPrecipprob: "+hour.getPrecipprob()
+								+"\nSnow: "+hour.getSnow()
+								+"\nPrecipType: "+hour.getPreciptype()
+								+"\n");
+					}
+				}else {System.out.println("No Hours Avaiable ^^");}
+			}
+		
+		var currentconditions = vroot.getCurrentConditions();
+		System.out.println("\n***CURRENT CONDITIONS***");
+		System.out.println("Datetime: " + currentconditions.getDatetime()
+						+ "datetimeEpoch: " + currentconditions.getDatetimeEpoch()
+						+ "temp: " + currentconditions.getTemp()
+						+ "humidity: " + currentconditions.getHumidity()
+						+ "precip: " + currentconditions.getPrecip()
+						+ "precipprob: " + currentconditions.getSnow()
+						+ "preciptype: " + currentconditions.getPreciptype()
+						+"\n\n");
+		
+		
 	}
 	
 	private void listSMHI() {

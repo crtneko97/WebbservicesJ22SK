@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ForeCastService {
 	
 	private final ForecastRepository forecastRepository;
+	
 	@Autowired
 	public ForeCastService(ForecastRepository forecastRepository) {
 		this.forecastRepository = forecastRepository;
@@ -99,7 +100,6 @@ public class ForeCastService {
 	
 	public float calculateAverageTemperature() {
 	    List<ForeCast> forecasts = forecastRepository.findAll();
-
 	    float sum = 0.0f;
 	    int count = 0;
 
@@ -109,13 +109,11 @@ public class ForeCastService {
 	        sum += temperature;
 	        count++;
 	    }
-
 	    if (count == 0) {
 	        // To avoid division by zero
 	        return 0.0f;
 	    }
 
-	    // Calculate the average temperature
 	    return sum / count;
 	}
 	
