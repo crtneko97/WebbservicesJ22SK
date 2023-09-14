@@ -70,6 +70,7 @@ private VisualService visualService;
 			else if(sel == 8) {forecastService.getForecastFromDBonedayahead();}
 			else if(sel == 9) {listAverageTempOneDayAhead();}
 			else if(sel == 10) {System.out.println(Menu.urlsWeb());}
+//			else if (sel == 98) {visualService.fetchVisualAndSaveToDB();}
 			else if (sel == 99) {listVisual();}
 			else if(sel == 100){break;}
 		}

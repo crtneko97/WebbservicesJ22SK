@@ -95,7 +95,6 @@ public class ForeCastController {
 	//vi måste hämta den befintiliga därför skriver vi inte new
 	var forecast = forecastService.get(id).get();
 	
-	forecast.setId(id);
 	forecast.setPredictionDatum(newforecastdto.getDate());
 	forecast.setPredictionTemperature(newforecastdto.getTemperature());
 	forecast.setPredictionHour(newforecastdto.getHour());

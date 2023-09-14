@@ -26,6 +26,7 @@ import com.example.webbkom1demo.services.smhi.data.Root;
 import com.example.webbkom1demo.services.smhi.data.TimeSeries;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+//Smhi service
 @Service
 public class ForeCastService {
 	

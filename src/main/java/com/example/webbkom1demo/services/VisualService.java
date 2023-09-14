@@ -5,13 +5,16 @@ import java.io.StringWriter;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
 import com.example.webbkom1demo.URLS.Urls;
-import com.example.webbkom1demo.model.Visual;
+import com.example.webbkom1demo.model.DataSource;
+import com.example.webbkom1demo.model.ForeCast;
 import com.example.webbkom1demo.repositories.ForecastRepository;
 import com.example.webbkom1demo.services.visual.vdata.Day;
 import com.example.webbkom1demo.services.visual.vdata.Hour;
@@ -31,7 +34,7 @@ public class VisualService {
 		this.forecastRepository = forecastRepository;
 	}
 	
-	private static List<Visual> visual = new ArrayList<>();
+	private static List<ForeCast> forecast = new ArrayList<>();
 	
 	
 	
@@ -40,14 +43,28 @@ public class VisualService {
 	public void fetchVisualAndSaveToDB() throws IOException {
 		var objectMapper = new ObjectMapper();
 		
-		VRoot vroot = objectMapper.readValue(new URL(Urls.visualAPI()),
-				VRoot.class);
-		List<Day> dayslist = vroot.getDays();
+		Day day = objectMapper.readValue(new URL(Urls.visualAPI()),
+				Day.class);
+		
+		//We are gonna list in the HOUR into the DB
+		List<Hour> hourlist = day.getHours();
 	    
 	    
-		for(Day days : dayslist) {
+		for(Hour hours : hourlist) {
+			var forecast = new ForeCast();
+			float temp = hours.getTemp();
+			int epoch = hours.getDatetimeEpoch();
 			
-			var forecastFromVisual = new Visual();
+			forecast.setId(UUID.randomUUID());
+			forecast.setPredictionTemperature(temp);
+			forecast.setLatitude(59.3154f);
+			forecast.setLongitude(18.0382f);
+			forecast.setPredictionDatum(null);
+			forecast.setPredictionHour(epoch);
+			forecast.setCreated(LocalDateTime.now());
+			forecast.setApiProvider(DataSource.Smhi);
+			forecastRepository.save(forecast);
+			
 		}
 
 		

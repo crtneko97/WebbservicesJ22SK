@@ -13,11 +13,20 @@ public class VRoot {
     private float tzoffset;
     private List<Day> days;
     private List<Object> alerts;
+    private List<Hour> hours;
     private CurrentConditions currentConditions;
     
     
     
     //Getters and setters IDE implemented
+    
+    
+    public List<Hour> getHours() {
+    	return hours;
+    }
+    public void setHours(List<Hour> hours) {
+    	this.hours = hours;
+    }
 	public int getQueryCost() {
 		return queryCost;
 	}
