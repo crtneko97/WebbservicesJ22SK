@@ -4,29 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VRoot {
-    private int queryCost;
+	private int queryCost;
     private float latitude;
     private float longitude;
     private String resolvedAddress;
     private String address;
     private String timezone;
-    private float tzoffset;
+    private int tzoffset;
     private List<Day> days;
-    private List<Object> alerts;
-    private List<Hour> hours;
-    private CurrentConditions currentConditions;
     
-    
-    
-    //Getters and setters IDE implemented
-    
-    
-    public List<Hour> getHours() {
-    	return hours;
-    }
-    public void setHours(List<Hour> hours) {
-    	this.hours = hours;
-    }
 	public int getQueryCost() {
 		return queryCost;
 	}
@@ -63,10 +49,10 @@ public class VRoot {
 	public void setTimezone(String timezone) {
 		this.timezone = timezone;
 	}
-	public float getTzoffset() {
+	public int getTzoffset() {
 		return tzoffset;
 	}
-	public void setTzoffset(float tzoffset) {
+	public void setTzoffset(int tzoffset) {
 		this.tzoffset = tzoffset;
 	}
 	public List<Day> getDays() {
@@ -75,17 +61,7 @@ public class VRoot {
 	public void setDays(List<Day> days) {
 		this.days = days;
 	}
-	public List<Object> getAlerts() {
-		return alerts;
-	}
-	public void setAlerts(List<Object> alerts) {
-		this.alerts = alerts;
-	}
-	public CurrentConditions getCurrentConditions() {
-		return currentConditions;
-	}
-	public void setCurrentConditions(CurrentConditions currentConditions) {
-		this.currentConditions = currentConditions;
-	}
+    
+    
     
 }

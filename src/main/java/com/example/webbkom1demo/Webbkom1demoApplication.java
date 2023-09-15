@@ -70,7 +70,7 @@ private VisualService visualService;
 			else if(sel == 8) {forecastService.getForecastFromDBonedayahead();}
 			else if(sel == 9) {listAverageTempOneDayAhead();}
 			else if(sel == 10) {System.out.println(Menu.urlsWeb());}
-//			else if (sel == 98) {visualService.fetchVisualAndSaveToDB();}
+			else if (sel == 98) {visualService.fetchVisualAndSaveToDB();}
 			else if (sel == 99) {listVisual();}
 			else if(sel == 100){break;}
 		}
@@ -163,53 +163,20 @@ private VisualService visualService;
 	//Go over what types that has to be sent into the MYSQL database, check out VRoot~Visual file
 	private void listVisual() throws IOException{
 		var objectMapper = new ObjectMapper();
-		
 		VRoot vroot = objectMapper.readValue(new URL(Urls.visualAPI()),
 				VRoot.class);
-
-		for(Day days : vroot.getDays()) {
-			
-			System.out.println(Cc.C+"***DAY***");
-			System.out.println("\n\nDateTime: " + days.getDatetime()
-							+ "\nDateTimeEpoch: "+days.getDatetimeEpoch() 
-							+ "\nTemp: "+days.getTemp() 
-							+ "\nHumidity: "+days.getHumidity()
-							+ "\nPrecip: "+days.getPrecip()
-							+ "\nPrecipprob: "+days.getPrecipprob()
-							+ "\nPreciptype: "+days.getPreciptype()
-							+ "\nSnow: "+days.getSnow()+Cc.RES+"\n");
+		System.out.println(vroot.getQueryCost()+"\n"+vroot.getResolvedAddress()+"\n"+vroot.getTimezone());
+		for (Day days : vroot.getDays()) {
+			System.out.println("***Days***" + days.getDatetime());
 			List<Hour> hours = days.getHours();
-				if(hours != null) {
-					for(Hour hour : hours) {
-						
-						System.out.println(Cc.GR+"***HOUR***");
-						System.out.println("Datetime: "+hour.getDatetime()
-								+"\nDatetimeepoch: "+hour.getDatetimeEpoch()
-								+"\nTemp: "+hour.getTemp()
-								+"\nHumidity: "+hour.getHumidity()
-								+"\nPrecip: "+hour.getPrecip()
-								+"\nPrecipprob: "+hour.getPrecipprob()
-								+"\nSnow: "+hour.getSnow()
-								+"\nPrecipType: "+hour.getPreciptype()
-								+"\n"+Cc.RES);
-						
-					}
-				}else {System.out.println("No Hours Avaiable ^^");}
-				System.out.println(Cc.YE+"How many days that were parsed: "+vroot.getDays().size()+Cc.RES);
+			if(hours != null) {
+				for(Hour hour : hours) {
+					
+					System.out.println("Time: "+hour.getDatetime()+"\nTemp: "+hour.getTemp()+"\n:Rain: "+hour.getPreciptype()+"\nSnow: "+hour.getSnow());
+				}
+			}
 		}
-		
-		var currentconditions = vroot.getCurrentConditions();
-		System.out.println("\n***CURRENT CONDITIONS***");
-		System.out.println("Datetime: " + currentconditions.getDatetime()
-						+ "datetimeEpoch: " + currentconditions.getDatetimeEpoch()
-						+ "temp: " + currentconditions.getTemp()
-						+ "humidity: " + currentconditions.getHumidity()
-						+ "precip: " + currentconditions.getPrecip()
-						+ "precipprob: " + currentconditions.getSnow()
-						+ "preciptype: " + currentconditions.getPreciptype()
-						+"\n\n");
-		
-		
+	
 	}
 	
 	

@@ -43,31 +43,40 @@ public class VisualService {
 	public void fetchVisualAndSaveToDB() throws IOException {
 		var objectMapper = new ObjectMapper();
 		
-		Day day = objectMapper.readValue(new URL(Urls.visualAPI()),
-				Day.class);
+		VRoot vroot = objectMapper.readValue(new URL(Urls.visualAPI()),
+				VRoot.class);
 		
-		//We are gonna list in the HOUR into the DB
-		List<Hour> hourlist = day.getHours();
-	    
-	    
-		for(Hour hours : hourlist) {
-			var forecast = new ForeCast();
-			float temp = hours.getTemp();
-			int epoch = hours.getDatetimeEpoch();
+		for(Day days : vroot.getDays()) {
 			
-			forecast.setId(UUID.randomUUID());
-			forecast.setPredictionTemperature(temp);
-			forecast.setLatitude(59.3154f);
-			forecast.setLongitude(18.0382f);
-			forecast.setPredictionDatum(null);
-			forecast.setPredictionHour(epoch);
-			forecast.setCreated(LocalDateTime.now());
-			forecast.setApiProvider(DataSource.Smhi);
-			forecastRepository.save(forecast);
+			List<Hour> hours = days.getHours();
+			int issnowing = days.getSnow();
 			
-		}
+			
+			
+		if(issnowing != 1 ) {
+		for (Hour hour : hours) {
+			boolean isSnowing = false;
+			String datum = hour.getDatetime();
+			float temp = hour.getTemp();
+			List<String>rain = hour.getPreciptype();
 
-		
+			var forecastfromVisual = new ForeCast();
+			forecastfromVisual.setId(UUID.randomUUID());
+			forecastfromVisual.setRainOrSnow(isSnowing);
+			forecastfromVisual.setPredictionTemperature(temp);
+			forecastfromVisual.setLatitude(59.3154f);
+			forecastfromVisual.setLongitude(18.0382f);
+			forecastfromVisual.setPredictionDatum(null);
+			forecastfromVisual.setPredictionHour(0);
+			forecastfromVisual.setCreated(LocalDateTime.now());
+			forecastfromVisual.setApiProvider(DataSource.Visual);
+			forecastRepository.save(forecastfromVisual);
+			
+
+		}
+	}
+	
+		}
 	}
 	
 	private VRoot readFromFile() throws IOException{
