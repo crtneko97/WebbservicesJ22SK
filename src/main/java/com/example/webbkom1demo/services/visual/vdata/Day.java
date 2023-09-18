@@ -1,10 +1,11 @@
 package com.example.webbkom1demo.services.visual.vdata;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class Day {
 	//Ändra om till date
+//	private String datetime;
 	private String datetime;
     private float temp;
     private List<String> preciptype;

@@ -5,7 +5,9 @@ import java.io.StringWriter;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -47,7 +49,7 @@ public class VisualService {
 				VRoot.class);
 		
 		for(Day days : vroot.getDays()) {
-			
+			String datum = days.getDatetime();
 			List<Hour> hours = days.getHours();
 			
 			int issnowing = days.getSnow();
@@ -56,8 +58,11 @@ public class VisualService {
 			
 		if(issnowing != 1 ) {
 		for (Hour hour : hours) {
+			String datetimeStr = hour.getDatetime();
+			int predictionHour;
+		    String[] parts = datetimeStr.split(":");
+		    predictionHour = Integer.parseInt(parts[0]);
 			boolean isSnowing = false;
-			String datum = hour.getDatetime();
 			float temp = hour.getTemp();
 			List<String>rain = hour.getPreciptype();
 
@@ -67,8 +72,12 @@ public class VisualService {
 			forecastfromVisual.setPredictionTemperature(temp);
 			forecastfromVisual.setLatitude(59.3154f);
 			forecastfromVisual.setLongitude(18.0382f);
-			forecastfromVisual.setPredictionDatum(null);
-			forecastfromVisual.setPredictionHour(0);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate predictionDatum = LocalDate.parse(datum, formatter);
+			forecastfromVisual.setPredictionDatum(predictionDatum);
+
+			
+			forecastfromVisual.setPredictionHour(predictionHour);
 			forecastfromVisual.setCreated(LocalDateTime.now());
 			forecastfromVisual.setApiProvider(DataSource.Visual);
 			forecastRepository.save(forecastfromVisual);
