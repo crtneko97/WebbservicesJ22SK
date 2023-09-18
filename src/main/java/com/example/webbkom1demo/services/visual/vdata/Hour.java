@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Hour {
+	//Ändra om till date
 	   	private String datetime;
 	    private float temp;
 	    private int snow;

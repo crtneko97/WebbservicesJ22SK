@@ -49,6 +49,7 @@ public class VisualService {
 		for(Day days : vroot.getDays()) {
 			
 			List<Hour> hours = days.getHours();
+			
 			int issnowing = days.getSnow();
 			
 			
@@ -78,6 +79,7 @@ public class VisualService {
 	
 		}
 	}
+	
 	
 	private VRoot readFromFile() throws IOException{
 		if(!Files.exists(Path.of("visualpredicitions.json"))) return new VRoot();
