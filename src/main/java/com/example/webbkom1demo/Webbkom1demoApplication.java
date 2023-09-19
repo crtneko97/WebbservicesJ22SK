@@ -17,6 +17,7 @@ import com.example.webbkom1demo.URLS.Urls;
 import com.example.webbkom1demo.colors.Cc;
 import com.example.webbkom1demo.menu.Menu;
 import com.example.webbkom1demo.model.ForeCast;
+import com.example.webbkom1demo.repositories.ForecastRepository;
 import com.example.webbkom1demo.services.ForeCastService;
 import com.example.webbkom1demo.services.VisualService;
 import com.example.webbkom1demo.services.smhi.SmhiService;
@@ -34,6 +35,9 @@ public class Webbkom1demoApplication implements CommandLineRunner{
 
 @Autowired
 private ForeCastService forecastService;
+
+@Autowired
+private ForecastRepository forecastRepository;
 
 
 @Autowired 
@@ -126,7 +130,8 @@ private VisualService visualService;
 		}
 	}
 	
-	
+	//Gör om den här så att den kommer in i databasen också
+	//Går att save:a nu la till save från repository
 	private void addPrediction(Scanner scan) throws IOException {
 
 		System.out.println("*** CREATE PREDICTION ***");
@@ -155,7 +160,7 @@ private VisualService visualService;
 		forecast.setPredictionHour(phour);
 		forecast.setPredictionTemperature(ptemp);
 		forecast.setRainOrSnow(rainorsnow);
-		forecastService.add(forecast);
+		forecastRepository.save(forecast);
 	}
 	
 	//Testing to write out the types from the visual API

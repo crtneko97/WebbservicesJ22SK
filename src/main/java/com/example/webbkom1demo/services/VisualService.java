@@ -40,6 +40,7 @@ public class VisualService {
 	
 	
 	
+	
 	// **ENTITY DONE TABLE SET IN MYSQL**
 	//Go thru the data classes and see if u have to arrange the orders, mainly understand the order
 	public void fetchVisualAndSaveToDB() throws IOException {

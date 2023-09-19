@@ -71,6 +71,8 @@ public class ForeCastService {
 	    
 	    return forecasts;
 	}
+	
+	//Random metod jag gjorde
 	public List<ForeCast> getForecastsWithCloseTemperatures(float targetTemperature, float tolerance) {
         List<ForeCast> forecasts = forecastRepository.findAll();
         List<ForeCast> closeTemperatureForecasts = new ArrayList<>();
@@ -82,7 +84,6 @@ public class ForeCastService {
             if (Math.abs(temperature - targetTemperature) <= tolerance) {
                 closeTemperatureForecasts.add(forecast);
                 
-                // Print the forecast details to the console
                 System.out.println("Forecast ID: " + forecast.getId());
                 System.out.println("Longitude: " + forecast.getLongitude());
                 System.out.println("Latitude: " + forecast.getLatitude());
@@ -95,10 +96,11 @@ public class ForeCastService {
         return closeTemperatureForecasts;
     }
 	
+	//Retunerar alla temps imorgon bara.
 	  public Float calculateAverageTemperatureForTomorrowUsingQuery() {
 	        return forecastRepository.calculateAverageTemperatureForTomorrow();
 	    }
-	
+	//Retunerar all temp tillsammans
 	public float calculateAverageTemperature() {
 	    List<ForeCast> forecasts = forecastRepository.findAll();
 	    float sum = 0.0f;
@@ -117,6 +119,7 @@ public class ForeCastService {
 
 	    return sum / count;
 	}
+	
 	
 	public void fetchAndSaveToDB() throws IOException {
 			var objectMapper = new ObjectMapper();
