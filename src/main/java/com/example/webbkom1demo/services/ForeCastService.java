@@ -46,12 +46,12 @@ public class ForeCastService {
 	    List<ForeCast> forecasts = forecastRepository.findAllForecastsForTomorrow();
 	    
 	    for (ForeCast forecast : forecasts) {
-	        System.out.println("Forecast ID: " + forecast.getId());
+	        System.out.println(Cc.YE+"Forecast ID: " + forecast.getId());
 	        System.out.println("Longitude: " + forecast.getLongitude());
 	        System.out.println("Latitude: " + forecast.getLatitude());
 	        System.out.println("Temperature: " + forecast.getPredictionTemperature());
 	        System.out.println("Prediction Datum: " + forecast.getPredictionDatum());
-	        System.out.println("-----------");
+	        System.out.println("-----------"+Cc.RES);
 	    }
 	    
 	    return forecasts;
@@ -61,12 +61,12 @@ public class ForeCastService {
 	    List<ForeCast> forecasts = forecastRepository.findAll();
 	    
 	    for (ForeCast forecast : forecasts) {
-	        System.out.println("Forecast ID: " + forecast.getId());
+	        System.out.println(Cc.C+"Forecast ID: " + forecast.getId());
 	        System.out.println("Longitude: " + forecast.getLongitude());
 	        System.out.println("Latitude: " + forecast.getLatitude());
 	        System.out.println("Temperature: " + forecast.getPredictionTemperature());
 	        System.out.println("Prediction Datum: " + forecast.getPredictionDatum());
-	        System.out.println("-----------");
+	        System.out.println("-----------"+Cc.RES);
 	    }
 	    
 	    return forecasts;
@@ -100,20 +100,18 @@ public class ForeCastService {
 	  public Float calculateAverageTemperatureForTomorrowUsingQuery() {
 	        return forecastRepository.calculateAverageTemperatureForTomorrow();
 	    }
-	//Retunerar all temp tillsammans
+	//Retunerar all temp tillsammans inte beroende på dag
 	public float calculateAverageTemperature() {
 	    List<ForeCast> forecasts = forecastRepository.findAll();
 	    float sum = 0.0f;
 	    int count = 0;
 
 	    for (ForeCast forecast : forecasts) {
-	        // Assuming 'getPredictionTemperature()' returns the temperature value as float
 	        float temperature = forecast.getPredictionTemperature();
 	        sum += temperature;
 	        count++;
 	    }
 	    if (count == 0) {
-	        // To avoid division by zero
 	        return 0.0f;
 	    }
 

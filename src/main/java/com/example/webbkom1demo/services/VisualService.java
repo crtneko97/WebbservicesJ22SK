@@ -90,7 +90,6 @@ public class VisualService {
 		}
 	}
 	
-	
 	private VRoot readFromFile() throws IOException{
 		if(!Files.exists(Path.of("visualpredicitions.json"))) return new VRoot();
 		ObjectMapper objectMapper = getObjectMapper();
