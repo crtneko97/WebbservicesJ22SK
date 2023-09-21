@@ -22,6 +22,7 @@ public class Menu {
 				+ "3: list weather predicition directly from SMHI api\n"
 				+ "4: list weather prediction one day ahead from SMHI api\n"
 				+ "5: add your own preidiction to the api/database by input\n"
+				+ "6: List average temp for all days that's been saved in the database.\n"
 				+ "8: list weather prediction one day ahead from database\n"
 				+ "9: list the average predicted temperature for tomorrow\n"
 				+ "10: list the following getmappings\n"

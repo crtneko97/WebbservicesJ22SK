@@ -71,6 +71,7 @@ private VisualService visualService;
 			else if(sel == 3) {listSMHI();}
 			else if(sel == 4) {listSMHIoneDayAhead();}
 			else if(sel == 5) {addPrediction(scan);}
+			else if(sel == 6) {listAverageTempFromAllDays();}
 			else if(sel == 8) {forecastService.getForecastFromDBonedayahead();}
 			else if(sel == 9) {listAverageTempOneDayAhead();}
 			else if(sel == 10) {System.out.println(Menu.urlsWeb());}
@@ -80,14 +81,22 @@ private VisualService visualService;
 		}
 	}
 	
+	private void listAverageTempFromAllDays() throws IOException{
+		System.out.println("Average temp from all inserted data\n AVG-Temp: " + forecastService.calculateAverageTemperature());
+	}
+	
+	//Den här listar inte den som är imorgon utan all temperatur som ligger i databasen
+	//Metoden som jag använde tidigare som inte använde sig utav query listade all temperatur som låg i databsen och inte den för imorgon.
 	private void listAverageTempOneDayAhead() throws IOException{
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime tmrw = now.plusDays(1);
 		String formatedDate = tmrw.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		Float averageTemperature = forecastService.calculateAverageTemperatureForTomorrowUsingQuery();
+		
 		
 		
 		System.out.println("\n\nDate: " + formatedDate
-				+ "\nAverage temp: " + forecastService.calculateAverageTemperature());
+				+ "\nAverage temp: " + averageTemperature);
 		
 	}
 

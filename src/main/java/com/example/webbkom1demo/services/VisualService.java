@@ -67,6 +67,9 @@ public class VisualService {
 			float temp = hour.getTemp();
 			List<String>rain = hour.getPreciptype();
 
+			if(temp != 0) {
+				
+			
 			var forecastfromVisual = new ForeCast();
 			forecastfromVisual.setId(UUID.randomUUID());
 			forecastfromVisual.setRainOrSnow(isSnowing);
@@ -82,7 +85,7 @@ public class VisualService {
 			forecastfromVisual.setCreated(LocalDateTime.now());
 			forecastfromVisual.setApiProvider(DataSource.Visual);
 			forecastRepository.save(forecastfromVisual);
-			
+			}
 
 		}
 	}

@@ -33,6 +33,18 @@ public class ForeCastController {
 	//Vi har nånting och vi mappar om det till något annat objekt
 	// responseEntity bakar ihop status kod och json samtidigt.
 	
+	
+	@GetMapping("/api/forecasts/average-hour-date")
+	public ResponseEntity<List<ForecastListDTO>> getAvgDateHour(){
+		return new ResponseEntity<List<ForecastListDTO>>(forecastService.getAverageByHourDate().stream().map(forecast->{
+			var forecastListDTO = new ForecastListDTO();
+			forecastListDTO.Date = forecast.getPredictionDatum();
+			forecastListDTO.Temperature = forecast.getPredictionTemperature();
+			forecastListDTO.Hour = forecast.getPredictionHour();
+			return forecastListDTO;
+		}).collect(Collectors.toList()), HttpStatus.OK);
+	}
+	
 	@GetMapping("/api/forecasts/")			
 	public ResponseEntity<List<ForecastListDTO>> getAll(){		
 		return new ResponseEntity<List<ForecastListDTO>>(forecastService.getForecastfromDB().stream().map(forecast->{

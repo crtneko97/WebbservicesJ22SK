@@ -2,6 +2,8 @@ package com.example.webbkom1demo.services;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -42,16 +44,50 @@ public class ForeCastService {
 	
 	//Skapa en metod för average från databasen
 	
+	public List<ForeCast> getAverageByHourDate(){
+		List<Object[]> forecasts = forecastRepository.calculateAverageTemperatureByHourAndDate();
+		List<ForeCast> forecastList = new ArrayList<>();
+		
+		for (Object[] forecastData : forecasts) {
+		    Integer predictionHour = (Integer) forecastData[0];
+		    Date predictionDate = (Date) forecastData[1];
+		    Double predictionTemp = (Double) forecastData[2];
+
+		    if (predictionDate != null && predictionTemp != 0) {
+		        // Convert java.sql.Date to java.util.Date
+		        java.util.Date utilDate = new java.util.Date(predictionDate.getTime());
+		        
+		        // Convert java.util.Date to Instant
+		        Instant instant = utilDate.toInstant();
+		        
+		        LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+
+		        ForeCast forecast = new ForeCast();
+		        forecast.setPredictionHour(predictionHour);
+		        forecast.setPredictionDatum(localDate);
+		        forecast.setPredictionTemperature(predictionTemp.floatValue());    
+		        forecastList.add(forecast);
+		    }
+	 
+		}
+		
+		return forecastList;
+	}
+		
+	
+	
 	public List<ForeCast> getForecastFromDBonedayahead() {
 	    List<ForeCast> forecasts = forecastRepository.findAllForecastsForTomorrow();
 	    
 	    for (ForeCast forecast : forecasts) {
-	        System.out.println(Cc.YE+"Forecast ID: " + forecast.getId());
-	        System.out.println("Longitude: " + forecast.getLongitude());
-	        System.out.println("Latitude: " + forecast.getLatitude());
-	        System.out.println("Temperature: " + forecast.getPredictionTemperature());
-	        System.out.println("Prediction Datum: " + forecast.getPredictionDatum());
-	        System.out.println("-----------"+Cc.RES);
+	    	if(forecast.getPredictionTemperature() != 0) {
+	    		System.out.println(Cc.YE+"Forecast ID: " + forecast.getId());
+	    		System.out.println("Longitude: " + forecast.getLongitude());
+	    		System.out.println("Latitude: " + forecast.getLatitude());
+	    		System.out.println("Temperature: " + forecast.getPredictionTemperature());
+	    		System.out.println("Prediction Datum: " + forecast.getPredictionDatum());
+	    		System.out.println("-----------"+Cc.RES);
+	    	}
 	    }
 	    
 	    return forecasts;
@@ -61,12 +97,15 @@ public class ForeCastService {
 	    List<ForeCast> forecasts = forecastRepository.findAll();
 	    
 	    for (ForeCast forecast : forecasts) {
+	    	if(forecast.getPredictionTemperature() != 0) {
+
 	        System.out.println(Cc.C+"Forecast ID: " + forecast.getId());
 	        System.out.println("Longitude: " + forecast.getLongitude());
 	        System.out.println("Latitude: " + forecast.getLatitude());
 	        System.out.println("Temperature: " + forecast.getPredictionTemperature());
 	        System.out.println("Prediction Datum: " + forecast.getPredictionDatum());
 	        System.out.println("-----------"+Cc.RES);
+	    	}
 	    }
 	    
 	    return forecasts;
