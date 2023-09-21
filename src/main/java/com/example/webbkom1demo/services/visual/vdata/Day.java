@@ -9,7 +9,7 @@ public class Day {
 	private String datetime;
     private float temp;
     private List<String> preciptype;
-    private int snow;
+    private int snow; //om snow är 1 så snowar det
     private List<Hour> hours;
     
 	public String getDatetime() {

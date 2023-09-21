@@ -17,17 +17,17 @@ public class Menu {
 		return  "\n***School project***\nCourse: Webservices in java\nTeacher: Stefan HolmBerg"
 				+"\nSchool: Stockholms Teknsika Institut\nStudent: Simon Kern \nGithub: https://github.com/crtneko97"
 				+"\n***Commands***\n"
-				+ "1: fetch weatherprediction api and save it to MYSQL database\n"
-				+ "2: list weather prediction from MYSQL database\n"
-				+ "3: list weather predicition directly from SMHI api\n"
-				+ "4: list weather prediction one day ahead from SMHI api\n"
+				+Cc.GR+ "1: fetch weatherprediction api and save it to MYSQL database\n"+Cc.RES
+				+"2: list weather prediction from MYSQL database\n"
+				+ Cc.YE +"3: list weather predicition directly from SMHI api\n"+Cc.RES
+				+ Cc.YE +"4: list weather prediction one day ahead from SMHI api\n"+Cc.RES
 				+ "5: add your own preidiction to the api/database by input\n"
 				+ "6: List average temp for all days that's been saved in the database.\n"
 				+ "8: list weather prediction one day ahead from database\n"
 				+ "9: list the average predicted temperature for tomorrow\n"
 				+ "10: list the following getmappings\n"
-				+ "98: Fetch visualforecast to database **WORKING**\n"
-				+"99: List VISUAL API(WORKING)**STILL IN PROGRESS**\n"
+				+Cc.GR+ "98: Fetch visualforecast to database **WORKING**\n"+Cc.RES
+				+Cc.YE+"99: List VISUAL API(WORKING)**WORKING**\n"+Cc.RES
 				+ "100: break the loop";
 	}
 	
@@ -35,7 +35,8 @@ public class Menu {
 		return "- /api/forecasts/ \n"
 				+ "- /average-temperature-tomorrow \n"
 				+ "- /api/forecasts/onedayahead \n"
-				+ "- /api/forecasts/{id} \n";
+				+ "- /api/forecasts/{id} \n"
+				+ "- /api/forecasts/average-hour-date \n";
 	}
 }
 /*

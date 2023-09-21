@@ -7,7 +7,7 @@ public class Hour {
 	//Ändra om till date
 	   	private String datetime;
 	    private float temp;
-	    private int snow;
+	    private int snow; //Om snow är 1 så "snowar" det
 	    private List<String> preciptype;
 	    
 		public String getDatetime() {
